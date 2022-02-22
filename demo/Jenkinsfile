@@ -1,0 +1,56 @@
+
+
+node('mac') {
+
+    withEnv([
+            'APP_STORE_CONNECT_API_KEY_KEY_ID=39WK925XJD', 'APP_STORE_CONNECT_API_KEY_ISSUER_ID=994142f9-e09b-4dce-aa1d-3806ae1c44fe',
+            'NO_COLOR=true',
+            'DISABLE_XCPRETTY=true',
+            'FASTLANE_SKIP_UPDATE_CHECK=true',
+            'FASTLANE_HIDE_CHANGELOG=true',
+            'LC_ALL=en_US.UTF-8',
+            'LANGUAGE=en_US.UTF-8',
+            'LANG=en_US.UTF-8',
+            'KEYCHAIN_PATH=/Users/jenkins/Library/Keychains/login.keychain-db'
+    ]) {
+
+        stage('clone') {
+            git credentialsId: 'jenkins-ldap-api-key-rw', url: 'https://git.smtdpoffice.net/mobile/react-native-mobilesdk-module.git'
+        }
+
+        stage('dependencies') {
+            sh '''
+            export PATH=/usr/local/bin:$PATH
+
+            export LC_ALL=en_US.UTF-8
+            export LANGUAGE=en_US.UTF-8
+            export LANG=en_US.UTF-8
+
+            cd demo
+            bundle install --deployment --binstubs
+            export PATH=$(pwd)/bin:$PATH
+            npm install
+            #(cd ios && pod install)
+            (cd ios && pod update IdensicMobileSDK)
+            '''
+        }
+
+        stage('ios:build') {
+            withCredentials([usernamePassword(credentialsId: 'mac-jenkins-user-pass', passwordVariable: 'KEYCHAIN_PASSWORD', usernameVariable: 'KEYCHAIN_USERNAME')]) {
+                withCredentials([file(credentialsId: 'app-store-connect-api-key-file', variable: 'APP_STORE_CONNECT_API_KEY_KEY_FILEPATH')]) {
+                    sh '''
+                    cd demo
+                    export PATH=$(pwd)/bin:/usr/local/bin:$PATH
+    
+                    export LC_ALL=en_US.UTF-8
+                    export LANGUAGE=en_US.UTF-8
+                    export LANG=en_US.UTF-8
+    
+                    fastlane ios beta skip_ios_clean_check:true skip_pod_install:true
+                    '''
+                }
+            }
+        }
+    }
+
+}
