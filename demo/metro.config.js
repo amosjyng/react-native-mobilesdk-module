@@ -1,6 +1,6 @@
 'use strict';
 const path = require('path');
-const blacklist = require('metro-config/src/defaults/blacklist');
+const blacklist = require('metro-config/src/defaults/exclusionList');
 const escape = require('escape-string-regexp');
 
 const packageRoot = path.resolve(__dirname, '..');

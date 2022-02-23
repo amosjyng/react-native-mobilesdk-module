@@ -38,6 +38,7 @@ export function LoginProvider({ children }) {
   useEffect(() => {
     async function restoreToken() {
       const rawData = await AsyncStorage.getItem(STORAGE_KEY)
+      console.log('Raw data is', rawData);
       if (!rawData) {
         return;
       }
