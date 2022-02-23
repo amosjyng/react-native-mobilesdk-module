@@ -1,6 +1,6 @@
 {
-  "name": "@sumsub/react-native-mobilesdk-module",
-  "title": "React Native Mobilesdk Module",
+  "name": "demo-wrapper",
+  "title": "NOT the React Native Mobilesdk Module",
   "version": "1.18.4",
   "description": "React Native Module exposing Sumsub MobileSDK",
   "main": "index.js",
@@ -39,14 +39,9 @@
     "eslint": "7.12.1",
     "eslint-plugin-react": "7.21.5",
     "eslint-plugin-react-hooks": "4.2.0",
-    "eslint-plugin-react-native": "3.10.0",
-    "react": "17.0.2",
-    "react-native": "0.67.1"
+    "eslint-plugin-react-native": "3.10.0"
   },
   "prettier": {
     "printWidth": 120
-  },
-  "dependencies": {
-    "fbjs": "^3.0.4"
   }
 }

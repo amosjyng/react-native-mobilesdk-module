@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import { useApiClient } from '../LoginContext';
 import LogEntryView from './LogEntryView';
 import { useLog } from './useLog';
-import SNSMobileSDK from '../../..';
+import SNSMobileSDK from '@sumsub/react-native-mobilesdk-module';
 
 /** @typedef {import('./useLog').LogEntry} LogEntry */
 /** @typedef {import('react-native').ListRenderItemInfo} ListRenderItemInfo */

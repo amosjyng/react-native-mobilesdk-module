@@ -1,6 +1,7 @@
 import { URL } from "react-native-url-polyfill";
 import { Platform } from 'react-native';
-import { version } from '../../package.json';
+
+const version = "1.0.0";
 
 /**
  * @typedef {object} ApiFetchOptions

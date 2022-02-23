@@ -1,5 +1,5 @@
 import React, { useState, useContext, useMemo, useEffect, useCallback } from "react";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ApiClient } from "./api";
 
 const STORAGE_KEY = "@AuthData";
